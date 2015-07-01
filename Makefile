@@ -42,8 +42,8 @@ out/tools/Makefile: tools/configure out/tools
 out/libs/Makefile: libs/configure out/libs
 	cd out/libs; ../../libs/configure --host=arm-none-eabi --with-multilib=$(MULTILIB_DIR) --prefix=$(PREFIX)/psp2
 
-out/gcc/Makefile: gcc/configure out/gcc
-	cd out/gcc; ../../gcc/configure --disable-libstdcxx-verbose --enable-languages=c,c++,lto --with-newlib --with-cpu=cortex-a9 --with-fpu=neon-fp16 --target=arm-none-eabi --with-headers=$(PREFIX)/psp2/include --prefix=$(PREFIX)
+out/gcc/Makefile: gcc/configure libs/include out/gcc
+	cd out/gcc; ../../gcc/configure --disable-libstdcxx-verbose --enable-languages=c,c++,lto --with-newlib --with-cpu=cortex-a9 --with-fpu=neon-fp16 --target=arm-none-eabi --with-headers=libs/include --prefix=$(PREFIX)
 
 out/multilib/Makefile: multilib/configure out/multilib
 	cd out/multilib; ../../multilib/configure $(MULTILIB_FLAGS)
