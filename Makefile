@@ -15,8 +15,11 @@ endif
 MULTILIB_FLAGS = --host=arm-none-eabi --prefix=$(PREFIX)
 MULTILIB_DIR = $(PREFIX)/arm-none-eabi/lib
 
-all: all-target-libs all-target-libgcc	\
+all: all-target-tools all-target-libs all-target-libgcc	\
 	all-target-multilib all-target-fpu-multilib all-target-thumb-multilib
+
+all-target-tools: out/tools/Makefile
+	$(MAKE) -C out/tools
 
 all-target-libs: out/libs/Makefile
 	$(MAKE) -C out/libs
@@ -32,6 +35,9 @@ all-target-fpu-multilib: out/multilib/fpu/Makefile
 
 all-target-thumb-multilib: out/multilib/thumb/Makefile
 	$(MAKE) -C out/multilib/thumb
+
+out/tools/Makefile: tools/configure out/tools
+	cd out/tools; ../../tools/configure --prefix=$(PREFIX)/psp2
 
 out/libs/Makefile: libs/configure out/libs
 	cd out/libs; ../../libs/configure --host=arm-none-eabi --with-multilib=$(MULTILIB_DIR) --prefix=$(PREFIX)/psp2
@@ -54,6 +60,9 @@ out/multilib/thumb/Makefile: multilib/configure out/multilib/thumb
 
 %aclocal.m4: %configure.ac
 	cd $(@D); aclocal
+
+out/tools: out
+	mkdir $@
 
 out/libs: out
 	mkdir $@
@@ -79,8 +88,11 @@ install: $(MULTILIB_DIR)/psp2/libgcc.a	\
 	$(MULTILIB_DIR)/psp2/crtend.o	\
 	$(MULTILIB_DIR)/psp2/fpu/crtend.o	\
 	$(MULTILIB_DIR)/psp2/thumb/crtend.o	\
-	install-target-libs install-target-multilib	\
+	install-target-tools install-target-libs install-target-multilib	\
 	install-target-fpu-multilib install-target-thumb-multilib
+
+install-target-tools:
+	make -C out/tools install
 
 install-target-libs:
 	make -C out/libs install
