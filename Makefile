@@ -109,22 +109,22 @@ install-target-thumb-multilib:
 	make -C out/multilib/thumb install
 
 $(MULTILIB_DIR)/psp2/libgcc.a: out/gcc/arm-none-eabi/libgcc/libgcc.a
-	install $< $@
+	install -D $< $@
 
 $(MULTILIB_DIR)/psp2/fpu/libgcc.a: out/gcc/arm-none-eabi/fpu/libgcc/libgcc.a
-	install $< $@
+	install -D $< $@
 
 $(MULTILIB_DIR)/psp2/thumb/libgcc.a: out/gcc/arm-none-eabi/thumb/libgcc/libgcc.a
-	install $< $@
+	install -D $< $@
 
 $(MULTILIB_DIR)/psp2/crtend.o: out/gcc/arm-none-eabi/libgcc/crtend.o
-	install $< $@
+	install -D $< $@
 
 $(MULTILIB_DIR)/psp2/fpu/crtend.o: out/gcc/arm-none-eabi/fpu/libgcc/crtend.o
-	install $< $@
+	install -D $< $@
 
 $(MULTILIB_DIR)/psp2/thumb/crtend.o: out/gcc/arm-none-eabi/thumb/libgcc/crtend.o
-	install $< $@
+	install -D $< $@
 
 uninstall:
 	rm -Rf $(MULTILIB_DIR)/psp2 $(MULTILIB_DIR)/psp2.x $(PREFIX)/psp2
