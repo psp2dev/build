@@ -17,6 +17,13 @@ WITH_LIBS_HEADERS := --with-headers=$(PWD)/libs/include
 MULTILIB_FLAGS := --host=arm-none-eabi --prefix=$(PREFIX) $(WITH_LIBS_HEADERS)
 MULTILIB_DIR := $(PREFIX)/arm-none-eabi/lib
 
+.PHONY: all install clean	\
+	all-target-tools install-target-tools	\
+	all-target-libs install-target-libs	\
+	all-target-multilib install-target-multilib	\
+	all-target-fpu-multilib install-target-fpu-multilib	\
+	all-target-thumb-multilib install-target-thumb-multilib
+
 all: all-target-tools all-target-libs all-target-libgcc	\
 	all-target-multilib all-target-fpu-multilib all-target-thumb-multilib
 
