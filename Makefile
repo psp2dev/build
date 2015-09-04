@@ -63,26 +63,23 @@ out/multilib/thumb/Makefile: multilib/configure out/multilib/thumb
 %aclocal.m4: %configure.ac
 	cd $(@D); aclocal
 
-out/tools: out
-	mkdir $@
+out/tools:
+	mkdir -p $@
 
-out/libs: out
-	mkdir $@
+out/libs:
+	mkdir -p $@
 
-out/gcc: out
-	mkdir $@
+out/gcc:
+	mkdir -p $@
 
-out/multilib/fpu: out/multilib
-	mkdir $@
+out/multilib/fpu:
+	mkdir -p $@
 
-out/multilib/thumb: out/multilib
-	mkdir $@
+out/multilib/thumb:
+	mkdir -p $@
 
-out/multilib: out
-	mkdir $@
-
-out:
-	mkdir $@
+out/multilib:
+	mkdir -p $@
 
 install: $(MULTILIB_DIR)/psp2/libgcc.a	\
 	$(MULTILIB_DIR)/psp2/fpu/libgcc.a	\
